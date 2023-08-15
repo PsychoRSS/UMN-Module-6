@@ -1,13 +1,32 @@
 var apiKey = "9ac7556bd3a00d2411501fa796cbd188";
-var city = "Longmont";
+var city = "longmont"
 var weatherEl = document.getElementById('#weather')
-const form = $("#form")
-const userInput = $("#user")
+const form = $("#weather")
 
+const submitButton = $("subBut")
 
+$("form").on("submit",function (event) {
+    event.preventDefault()
 
+    const userInput = $("#user").val()
+    if(!userInput){
+        
+    }
+
+    // console.log(userInput) 
+    renderHistory()
+})
+
+function renderHistory(){
+    
+    const lastCity =  JSON.parse(localStorage.getItem("citys"))
+    console.log(lastCity)
+};
+
+renderHistory()
 function getWether() {
-    // e.preventDefault
+
+    // e.preventDefault()
     var api =  "https://api.openweathermap.org/data/2.5/forecast?q= "+ city + "&units=imperial&appid=" + apiKey
 
     fetch(api)
@@ -78,5 +97,9 @@ function getWether() {
 }
 
 getWether()
+
+function savedCities() {
+
+}
 console.log(city)
 
