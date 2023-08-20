@@ -1,5 +1,5 @@
 var apiKey = "9ac7556bd3a00d2411501fa796cbd188";
-var city = "longmont"
+var city = "boulder"
 var weatherEl = document.getElementById('#weather')
 const form = $("#weather")
 
@@ -9,25 +9,30 @@ $("form").on("submit",function (event) {
     event.preventDefault()
 
     const userInput = $("#user").val()
-    if(!userInput){
-        
+    if(!userInput === ''){
+        window.prompt("no input nerd")
     }
-
+    localStorage.setItem("citys", userInput)
     // console.log(userInput) 
-    renderHistory()
+    renderHistory(userInput)
+    getWether(userInput)
+
 })
 
-function renderHistory(){
+function renderHistory(userInput){
+
+    const lastCity =  localStorage.getItem("citys")
+
+    // lastCity.push()
     
-    const lastCity =  JSON.parse(localStorage.getItem("citys"))
     console.log(lastCity)
 };
 
 renderHistory()
-function getWether() {
+function getWether(userInput) {
 
     // e.preventDefault()
-    var api =  "https://api.openweathermap.org/data/2.5/forecast?q= "+ city + "&units=imperial&appid=" + apiKey
+    var api =  "https://api.openweathermap.org/data/2.5/forecast?q= "+ userInput + "&units=imperial&appid=" + apiKey
 
     fetch(api)
     .then(function(response) {
@@ -50,7 +55,7 @@ function getWether() {
             const windSpeed = element.wind.speed
             const weatherIcon = element.weather[0].icon
             const weatherDay =  element.dt_txt
-            console.log(weatherDay)
+            // console.log(weatherDay)
 
             const iconurl = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
 
@@ -81,22 +86,22 @@ function getWether() {
             weatherDescDiv.append(windEl)
 
             
-            console.log(weatherData)
-            console.log(tempra)
-            console.log(MyHumidity)
-            console.log(windSpeed)
-            console.log(weatherIcon)
+            // console.log(weatherData)
+            // console.log(tempra)
+            // console.log(MyHumidity)
+            // console.log(windSpeed)
+            // console.log(weatherIcon)
         }
       
  
-        console.log(data)
-        console.log(weatherData[0].dt_txt)
+        // console.log(data)
+        // console.log(weatherData[0].dt_txt)
         // console.log(dayWeather)
         // console.log(newNewData)
     })
 }
 
-getWether()
+// getWether()
 
 function savedCities() {
 
